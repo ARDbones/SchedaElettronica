@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - "9"
+dist: trusty
+sudo: required
+
+branches:
+  only:
+  - master
+
+cache:
+  directories:
+    - node_modules
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
+  - ng build --base-href https://ARDbones.github.io/SchedaElettronica/
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/SchedaElettronica
+  on:
+    branch: master
