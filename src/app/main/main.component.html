@@ -1,3 +1,75 @@
-<p>
-  main works!
-</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Scheda elettronica</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Addominali</a>
+      <a class="nav-item nav-link" href="#" *ngIf="!flagScheda">Lombari</a>
+      <a class="nav-item nav-link" href="#" *ngIf="flagScheda">Polpacci</a>
+      <a class="nav-item nav-link" href="#" *ngIf="flagScheda">Gambe</a>
+      <a class="nav-item nav-link" href="#" *ngIf="!flagScheda">Pettorali</a>
+      <a class="nav-item nav-link" href="#" *ngIf="flagScheda">Dorsali</a>
+      <a class="nav-item nav-link" href="#" *ngIf="!flagScheda">Deltoidi</a>
+      <a class="nav-item nav-link" href="#" *ngIf="!flagScheda">Bicipiti</a>
+      <a class="nav-item nav-link" href="#" *ngIf="flagScheda">Tricipiti</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <h4 class="display-4">
+    Scheda <span *ngIf="flagScheda">A</span><span *ngIf="!flagScheda">B</span>
+  </h4>
+  <div class="">
+    <button type="button" class="btn" (click)="cambiaScheda()">Cambia scheda</button>
+  </div>
+  
+  <div *ngFor="let bodyPart of schedaAttiva" class="body-part">
+    <hr />
+    <div class="sec-title">
+      <p class="lead">
+        {{bodyPart.title}}
+      </p>
+    </div>
+  
+    <div *ngFor="let exercise of bodyPart.esercizi">
+      <div class="container">
+        <div class="row">
+          <div class="col-8">
+            <div class="row">
+              <p>{{exercise.descrizione}}</p>
+            </div>
+            <div class="row">
+              <p>{{exercise.ripetizioni}} x {{exercise.serie}}</p>
+            </div>
+          </div>
+          <div class="col-4 text-center pt-3 label-peso">
+            <p>{{exercise.peso}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-8">
+          <button type="button" class="btn btn-primary" (click)="completaSerie(schedaAttiva.indexOf(bodyPart), bodyPart.esercizi.indexOf(exercise))">Completa serie</button>
+        </div>
+        <div class="col-4">
+          <button type="button" class="btn btn-outline-success" (click)="aumentaPeso(schedaAttiva.indexOf(bodyPart), bodyPart.esercizi.indexOf(exercise))">+</button>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-8">
+          <button type="button" class="btn btn-outline-warning" (click)="saltaEsercizio(schedaAttiva.indexOf(bodyPart), bodyPart.esercizi.indexOf(exercise))">Salta</button>
+        </div>
+        <div class="col-4">
+          <button type="button" class="btn btn-outline-danger" (click)="diminuisciPeso(schedaAttiva.indexOf(bodyPart), bodyPart.esercizi.indexOf(exercise))">-</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
