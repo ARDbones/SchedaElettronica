@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-main',
@@ -32,7 +33,7 @@ export class MainComponent implements OnInit {
           "descrizione" : "Donkey",
           "ripetizioni" : 15,
           "serie" : 3,
-          "peso" : 35
+          "peso" : 40
         }
       ]
     },
@@ -43,13 +44,13 @@ export class MainComponent implements OnInit {
           "descrizione" : "Squat",
           "ripetizioni" : 12,
           "serie" : 4,
-          "peso" : 0
+          "peso" : 20
         },
         {
           "descrizione" : "Leg extension",
           "ripetizioni" : 10,
           "serie" : 3,
-          "peso" : 0
+          "peso" : 45
         }
       ]
     },
@@ -176,13 +177,17 @@ export class MainComponent implements OnInit {
   constructor() {
     let self = this;
 
+    self.schedaAttiva = self.scheda_A;
+
     /* CONTROLLI CACHE */
 
-    self.schedaAttiva = localStorage.getItem('schedaAttiva');
-    if(!self.schedaAttiva) {
-      self.schedaAttiva = self.scheda_A;
-      localStorage.setItem('schedaAttiva', self.schedaAttiva);
-    }
+    //let cachedScheda = localStorage.getItem('schedaAttiva');
+    //if(!cachedScheda) {
+    //  self.schedaAttiva = self.scheda_A.valueOf();
+    //  localStorage.setItem('schedaAttiva', self.schedaAttiva);
+    //}
+    //else
+    //  self.schedaAttiva = cachedScheda;
   }
 
   ngOnInit() {
@@ -191,16 +196,17 @@ export class MainComponent implements OnInit {
   cambiaScheda(){
     let self = this;
     if(self.flagScheda){
-      self.schedaAttiva = self.scheda_A;
+      self.schedaAttiva = self.scheda_B;
       self.flagScheda = false;
     }
     else{
-      self.schedaAttiva = self.scheda_B;
+      self.schedaAttiva = self.scheda_A;
       self.flagScheda = true;
     }
 
     console.log(self.scheda_A);
     console.log(self.scheda_B);
+    console.log(self.flagScheda);
   }
 
   completaSerie(i,j){
@@ -253,6 +259,14 @@ export class MainComponent implements OnInit {
 
     /* Salva in cache */
     localStorage.setItem('schedaAttiva', self.schedaAttiva);
+  }
+
+  scrollingTo(id) {
+    let delay = 1000;
+    let offset = 70;
+    $('html, body').animate({
+        scrollTop: $("#" + id).offset().top - offset
+    }, delay);
   }
 
 }

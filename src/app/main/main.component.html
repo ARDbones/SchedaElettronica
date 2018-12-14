@@ -5,15 +5,15 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">Addominali</a>
-      <a class="nav-item nav-link" href="#" *ngIf="!flagScheda">Lombari</a>
-      <a class="nav-item nav-link" href="#" *ngIf="flagScheda">Polpacci</a>
-      <a class="nav-item nav-link" href="#" *ngIf="flagScheda">Gambe</a>
-      <a class="nav-item nav-link" href="#" *ngIf="!flagScheda">Pettorali</a>
-      <a class="nav-item nav-link" href="#" *ngIf="flagScheda">Dorsali</a>
-      <a class="nav-item nav-link" href="#" *ngIf="!flagScheda">Deltoidi</a>
-      <a class="nav-item nav-link" href="#" *ngIf="!flagScheda">Bicipiti</a>
-      <a class="nav-item nav-link" href="#" *ngIf="flagScheda">Tricipiti</a>
+      <a class="nav-item nav-link" href="#Addominali">Addominali</a>
+      <a class="nav-item nav-link" href="#Lombari" *ngIf="!flagScheda">Lombari</a>
+      <a class="nav-item nav-link" href="#Polpacci" *ngIf="flagScheda">Polpacci</a>
+      <a class="nav-item nav-link" href="#Gambe" *ngIf="flagScheda">Gambe</a>
+      <a class="nav-item nav-link" href="#Pettorali" *ngIf="!flagScheda">Pettorali</a>
+      <a class="nav-item nav-link" href="#Dorsali" *ngIf="flagScheda">Dorsali</a>
+      <a class="nav-item nav-link" href="#Deltoidi" *ngIf="!flagScheda">Deltoidi</a>
+      <a class="nav-item nav-link" href="#Bicipiti" *ngIf="!flagScheda">Bicipiti</a>
+      <a class="nav-item nav-link" href="#Tricipiti" *ngIf="flagScheda">Tricipiti</a>
     </div>
   </div>
 </nav>
@@ -27,7 +27,7 @@
     <button type="button" class="btn" (click)="cambiaScheda()">Cambia scheda</button>
   </div>
   
-  <div *ngFor="let bodyPart of schedaAttiva" class="body-part">
+  <div *ngFor="let bodyPart of schedaAttiva" class="body-part" [id]="bodyPart.title">
     <hr />
     <div class="sec-title">
       <p class="lead">
